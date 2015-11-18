@@ -261,6 +261,7 @@ endif
 
 " colors for gvim
 if has('gui_running')
+    set guifont=Anonymous\ Pro\ for\ Powerline\ Bold\ 12
     colorscheme solarized
 endif
 

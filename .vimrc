@@ -24,8 +24,6 @@ Bundle 'gmarik/vundle'
 
 " Bundles from GitHub repos:
 
-" Python and PHP Debugger
-Bundle 'fisadev/vim-debug.vim'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
@@ -34,8 +32,6 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 " Code and files fuzzy finder
 Bundle 'kien/ctrlp.vim'
-" Extension to ctrlp, for fuzzy command finder
-Bundle 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Bundle 'mattn/emmet-vim'
 " Git integration
@@ -46,10 +42,6 @@ Bundle 'kien/tabman.vim'
 Bundle 'bling/vim-airline'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
-" Consoles as buffers
-Bundle 'rosenfeld/conque-term'
-" Pending tasks list
-Bundle 'fisadev/FixedTaskList.vim'
 " Surround
 Bundle 'tpope/vim-surround'
 " Autoclose
@@ -73,15 +65,6 @@ Bundle 'nvie/vim-flake8'
 Bundle 'fs111/pydoc.vim'
 " Automatically sort python imports
 Bundle 'fisadev/vim-isort'
-" Relative numbering of lines (0 is the current line)
-" (disabled by default because is very intrusive and can't be easily toggled
-" on/off. When the plugin is present, will always activate the relative 
-" numbering every time you go to normal mode. Author refuses to add a setting 
-" to avoid that)
-" Bundle 'myusuf3/numbers.vim'
-
-" Bundles from vim-scripts repos
-
 " Autocompletion
 Bundle 'AutoComplPop'
 " Python code checker
@@ -94,6 +77,9 @@ Bundle 'matchit.zip'
 Bundle 'Wombat'
 " Yank history navigation
 Bundle 'YankRing.vim'
+" Package with colours
+Bundle 'flazz/vim-colorschemes'
+
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -172,8 +158,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " old autocomplete keyboard shortcut
 imap <C-J> <C-X><C-O>
 
-" show pending tasks list
-map <F2> :TaskList<CR>
+map <F2> :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
 
 " removes trailing spaces of python files
 " (and restores cursor position)
@@ -191,17 +176,6 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuSbar ctermbg=7 guibg=DarkGray
 " highlight PmenuThumb guibg=Black
 
-" debugger keyboard shortcuts
-let g:vim_debug_disable_mappings = 1
-map <F5> :Dbg over<CR>
-map <F6> :Dbg into<CR>
-map <F7> :Dbg out<CR>
-map <F8> :Dbg here<CR>
-map <F9> :Dbg break<CR>
-map <F10> :Dbg watch<CR>
-map <F11> :Dbg down<CR>
-map <F12> :Dbg up<CR>
-
 " insert ipdb breakpoint with \b
 nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
@@ -212,11 +186,13 @@ nmap ,G :CtrlPBufTagAll<CR>
 nmap ,f :CtrlPLine<CR>
 nmap ,m :CtrlPMRUFiles<CR>
 nmap ,c :CtrlPCmdPalette<CR>
+
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
     call feedkeys(a:search_text)
 endfunction
+
 " CtrlP with default text
 nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
 nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
@@ -225,6 +201,7 @@ nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+
 " Don't change working directory
 let g:ctrlp_working_path_mode = 0
 " Ignore files on fuzzy finder
@@ -275,7 +252,8 @@ let g:tabman_focus  = 'tf'
 if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
 	let &t_Co = 256
     " color
-    colorscheme fisa
+    set background=dark
+    colorscheme gruvbox
 else
     " color
     colorscheme delek
@@ -283,7 +261,7 @@ endif
 
 " colors for gvim
 if has('gui_running')
-    colorscheme wombat
+    colorscheme solarized
 endif
 
 " when scrolling, keep cursor 3 lines away from screen border
@@ -297,15 +275,15 @@ set wildmode=list:longest
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
 " vim-airline settings
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'bubblegum'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'badwolf'
 let g:airline#extensions#whitespace#enabled = 0
 
 " to use fancy symbols for airline, uncomment the following lines and use a
 " patched font (more info on the README.rst)
-"if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-"endif
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
 "let g:airline_left_sep = '⮀'
 "let g:airline_left_alt_sep = '⮁'
 "let g:airline_right_sep = '⮂'

@@ -253,7 +253,7 @@ if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
 	let &t_Co = 256
     " color
     set background=dark
-    colorscheme gruvbox
+    colorscheme solarized
 else
     " color
     colorscheme delek
@@ -292,3 +292,5 @@ endif
 "let g:airline_symbols.branch = '⭠'
 "let g:airline_symbols.readonly = '⭤'
 "let g:airline_symbols.linenr = '⭡'
+
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null

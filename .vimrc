@@ -23,7 +23,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Bundles from GitHub repos:
-
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
@@ -40,6 +39,8 @@ Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
 " Airline
 Bundle 'bling/vim-airline'
+" Airline Themes
+Bundle 'vim-airline/vim-airline-themes'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
 " Surround
@@ -79,7 +80,6 @@ Bundle 'Wombat'
 Bundle 'YankRing.vim'
 " Package with colours
 Bundle 'flazz/vim-colorschemes'
-
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -277,7 +277,7 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
 " vim-airline settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'solarized'
 let g:airline#extensions#whitespace#enabled = 0
 
 " to use fancy symbols for airline, uncomment the following lines and use a
